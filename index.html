@@ -477,7 +477,11 @@ function noise(t0,d,v,f,type,f2){if(!AC||muted||!nbuf)return;try{var s=AC.create
 function chime(fr,step,type,v){fr.forEach(function(f,i){tone(f,i*step,.9,type||"triangle",v||.16)})}
 function sTear(p){noise(0,.07,.06,900+p*2600,"bandpass")}
 function sTap(){tone(520,0,.12,"sine",.07)}
-function sBoom(){tone(150,0,.7,"sine",.5,36);noise(0,.5,.25,700,"lowpass",90);noise(0,.25,.12,3500,"highpass")}
+/* 開封の音(3+4): 金のフォイルを切るチャキッ → 袋が開くシュッ → 高い鈴のキラッ */
+function sBoom(){
+  noise(0,.05,.2,6000,"highpass");tone(1760,.01,.18,"square",.025,1320);tone(3520,.02,.25,"sine",.03);tone(2637,.05,.4,"sine",.04);
+  noise(.1,.22,.14,2400,"highpass",5000);noise(.3,.1,.1,4800,"highpass");
+  [1319,1568,1976,2349,2637].forEach(function(f,i){tone(f,.2+i*.07,.8,"sine",.08)})}
 function sFlip(){noise(0,.18,.1,1800,"bandpass",600)}
 function sCue(l){
   if(l===0){tone(660,0,.3,"sine",.06)}
