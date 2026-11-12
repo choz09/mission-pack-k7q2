@@ -550,6 +550,9 @@ function flashIt(col,peak,ms){var f=$("flash");f.style.background=col;try{f.anim
 function shake(){world.classList.remove("shake");void world.offsetWidth;world.classList.add("shake")}
 
 /* ---- main tick (ring) ---- */
+var lastIx=null,spinLast=0;
+/* パックを回して選ぶ音: パックが1つ正面を通るたびに小さなカチッ(自動で回っている間は鳴らさない) */
+function sSpin(v){var n=performance.now();if(n-spinLast<45)return;spinLast=n;var k=Math.min(1,v/8);noise(0,.035,.07,2600+k*1400,"bandpass",null,3);tone(1500+k*500,0,.05,"triangle",.025,1000)}
 function tick(){
   try{
     if(state==="carousel"){
@@ -558,6 +561,7 @@ function tick(){
       else if(idle){ang+=.1}
       else if(Math.abs(vel)>.25){ang+=vel;vel*=.95;snapTo=null}
       else{var tgt=snapTo!=null?snapTo:Math.round(ang/STEP)*STEP;ang+=(tgt-ang)*.14;vel=0;if(Math.abs(tgt-ang)<.02)snapTo=null}
+      var ix=Math.round(ang/STEP);if(ix!==lastIx){if(lastIx!==null&&!idle)sSpin(Math.abs(vel));lastIx=ix}
       updateRing();
     }
   }catch(e){}
