@@ -483,6 +483,10 @@ function sBoom(){
   noise(0,.05,.2,6000,"highpass");tone(1760,.01,.18,"square",.025,1320);tone(3520,.02,.25,"sine",.03);tone(2637,.05,.4,"sine",.04);
   noise(.1,.22,.14,2400,"highpass",5000);noise(.3,.1,.1,4800,"highpass");
   [1319,1568,1976,2349,2637].forEach(function(f,i){tone(f,.2+i*.07,.8,"sine",.08)})}
+/* リバーを絞る音: 上がる弦(指の動きに合わせて高くなる)→ めくり終わりに高い鈴のキラッ */
+var sqLast=0;
+function sSqueeze(p){var n=performance.now();if(n-sqLast<22)return;sqLast=n;p=Math.max(0,Math.min(1,p));tone(220+p*660,0,.06,"sine",.015+.02*p)}
+function sRiverDone(){[1175,1568,1976,2349].forEach(function(f,i){tone(f,i*.06,.95,"sine",.07)});noise(0,.12,.06,3000,"highpass")}
 function sFlip(){noise(0,.18,.1,1800,"bandpass",600)}
 function sCue(l){
   if(l===0){tone(660,0,.3,"sine",.06)}
@@ -716,7 +720,7 @@ function sqSpring(){
 function sqComplete(){
   if(state!=="river")return;
   state="rivering";sqDrag=null;cancelAnimationFrame(sqAnim);setHint("","");
-  sqEl.classList.add("on");sFlip();tone(880,0,.3,"triangle",.09);
+  sqEl.classList.add("on");sRiverDone();
   try{sqEl.animate([{transform:"translateX(46px) scale(1.7)"},{transform:"translateX(46px) scale(1.95)"},{transform:"translateX(46px) scale(1.7)"}],{duration:420,easing:"ease-out"})}catch(e){}
   setTimeout(function(){sqEl.style.transform="translateX(0) scale(1)"},650);
   setTimeout(finish,1150);
@@ -791,7 +795,7 @@ stage.addEventListener("pointermove",function(e){
   if(state==="carousel"&&dragging){var dx=s.x-lastX;ang+=dx/PXDEG;vel=vel*.6+(dx/PXDEG)*.4;idleSince=performance.now()}
   else if(state==="river"&&sqDrag){
     var dl=(sqDrag.y0-e.clientY)/sqDrag.k,ff=Math.max(30,Math.min(100,sqDrag.f0-dl/SQH*100));
-    sqRender(ff);if(Math.random()<.5)noise(0,.05,.03,1400+Math.random()*800,"bandpass");
+    sqRender(ff);sSqueeze((100-ff)/48);
     if(cur.id==="L"&&!cur.gold&&ff<=68){cur.gold=true;royalShift()}
     if(ff<=52)sqComplete();
   }
