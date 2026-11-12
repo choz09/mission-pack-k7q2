@@ -194,7 +194,7 @@ body{background:radial-gradient(ellipse 70% 60% at 50% 45%,#16223f 0,#0a1020 62%
 .hasart .art{background:#0b1430 var(--packimg) center/100% 100% no-repeat}
 .hasart .art .crimp,.hasart .art .frame,.hasart .art .pm{display:none}
 .hasart .art .pn{top:96px;font-size:46px}
-.hasart .art .pr{top:251px;font-size:13px;letter-spacing:.34em;text-indent:.34em}
+.hasart .art .pr{top:246px;font-size:13px;letter-spacing:.34em;text-indent:.34em}
 .hasart .art::before{content:"";position:absolute;left:8%;right:8%;top:27%;bottom:25%;background:radial-gradient(ellipse at 50% 50%,rgba(10,18,44,.5),rgba(10,18,44,0) 75%);pointer-events:none;z-index:0}
 
 .art .pillow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 82% 74% at 50% 50%,rgba(0,0,10,0) 50%,rgba(0,0,12,.36) 100%),linear-gradient(to bottom,rgba(0,0,10,.36) 0,rgba(0,0,10,0) 13%,rgba(0,0,10,0) 87%,rgba(0,0,10,.36) 100%)}
@@ -400,7 +400,7 @@ var STRIP=64;
 /* 「パック下地_控えめ.png」があればそちらを使い、無ければ「パック下地.png」。元の画像は消さずに残す */
 (function(){function tryLoad(u,cb){var im=new Image();im.onload=function(){cb(u)};im.onerror=function(){cb(null)};im.src=u}
   function use(u){document.documentElement.style.setProperty("--packimg",'url("'+u+'")');document.documentElement.classList.add("hasart");STRIP=28;document.documentElement.style.setProperty("--strip","28px")}
-  tryLoad("素材/パック下地_控えめ.png",function(u){if(u)return use(u);tryLoad("素材/パック下地.png",function(u2){if(u2)use(u2)})})})();
+  tryLoad("素材/パック下地改.png",function(u0){if(u0)return use(u0);tryLoad("素材/パック下地_控えめ.png",function(u){if(u)return use(u);tryLoad("素材/パック下地.png",function(u2){if(u2)use(u2)})})})})();
 /* ---- pack art ---- */
 (function(){var p=[],i;for(i=0;i<=40;i++)p.push((i*5.5)+"px "+(i%2?0:5)+"px");
   for(i=40;i>=0;i--)p.push((i*5.5)+"px "+(360-(i%2?0:5))+"px");
