@@ -552,7 +552,7 @@ function shake(){world.classList.remove("shake");void world.offsetWidth;world.cl
 /* ---- main tick (ring) ---- */
 var lastIx=null,spinLast=0;
 /* パックを回して選ぶ音: パックが1つ正面を通るたびに小さなカチッ(自動で回っている間は鳴らさない) */
-function sSpin(v){var n=performance.now();if(n-spinLast<45)return;spinLast=n;var k=Math.min(1,v/8);noise(0,.045,.08,1300+k*700,"bandpass",null,2.5);tone(520+k*140,0,.08,"triangle",.04,280);tone(150,0,.07,"sine",.05,90)}
+function sSpin(v){var n=performance.now();if(n-spinLast<45)return;spinLast=n;var k=Math.min(1,v/8);noise(0,.06,.08,850+k*450,"bandpass",null,2);noise(0,.05,.09,380,"lowpass");tone(360+k*90,0,.09,"triangle",.035,200);tone(120,0,.11,"sine",.09,65)}
 function tick(){
   try{
     if(state==="carousel"){
