@@ -149,7 +149,7 @@ body{background:radial-gradient(ellipse 70% 60% at 50% 45%,#16223f 0,#0a1020 62%
 .pc .ft .dm.a{right:.62em;top:.62em}.pc .ft .dm.b{left:.62em;bottom:.62em}
 .pc .ft .rk{position:absolute;left:.22em;top:.2em;font-style:normal;font-weight:400;font-size:4.1em;line-height:1;letter-spacing:-.04em;font-family:"Abril Fatface","Playfair Display","Hiragino Mincho ProN","Yu Mincho",serif;transform:scaleX(.9);transform-origin:0 0}
 .pc .ft .rk.pfd{font-family:"Playfair Display","Abril Fatface",serif;font-weight:900}
-.pc .ft .rk.q{-webkit-text-stroke:.03em currentColor}
+.pc .ft .rk.qq{font-size:3.55em;top:.24em;left:.27em}
 .pc .ft .su{position:absolute;right:.17em;bottom:.04em;font-size:5.7em;line-height:1;font-family:Georgia,"Times New Roman",serif}
 .pc.mini{filter:drop-shadow(0 .3em .45em rgba(0,0,0,.6))}
 .pc.mini .ft{background:linear-gradient(160deg,#f2e6c4 0%,#e6d4a6 55%,#dcc794 100%);box-shadow:0 0 0 .13em #d6b463,0 0 0 .22em rgba(50,34,8,.6)}
@@ -379,7 +379,7 @@ var PIPS={2:[[1,0],[1,6]],3:[[1,0],[1,3],[1,6]],4:[[0,0],[2,0],[0,6],[2,6]],5:[[
 var PX=[2.65,3.5,4.35];
 var FACE_STYLE="simple";   /* "simple"=数字とスートだけ(スクラッチカード型) / "classic"=絵札・スートの並び(素材\絵札を使う) */
 function faceHTML(c,cls,mini){var col=(c.s===1||c.s===2)?"red":"blk",ch=SU[c.s],R=c.r;
-  if(!mini&&FACE_STYLE==="simple")return'<div class="fc ft '+col+(cls||"")+'"><i class="rk'+(R===14||R===13?" pfd":(R===12?" q":""))+'">'+rl(R)+'</i><span class="su">'+ch+'</span></div>';
+  if(!mini&&FACE_STYLE==="simple")return'<div class="fc ft '+col+(cls||"")+'"><i class="rk'+(R===14||R===13?" pfd":(R===12?" pfd qq":""))+'">'+rl(R)+'</i><span class="su">'+ch+'</span></div>';
   if(mini)return'<div class="fc ft '+col+(cls||"")+'"><span class="wm"></span><i class="dm a"></i><i class="dm b"></i><i class="rk">'+rl(R)+'</i><span class="su">'+ch+'</span></div>';
   var ix='<div class="ix"><b>'+rl(R)+'</b><em>'+ch+'</em></div><div class="ix r"><b>'+rl(R)+'</b><em>'+ch+'</em></div>',body="";
   if(R===14){body=c.s===0?'<img class="ace" src="素材/A_スペード_大スート.png" alt="">':'<span class="ace g">'+ch+'</span>'}
