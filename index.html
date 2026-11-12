@@ -475,7 +475,8 @@ function tone(f,t0,d,type,v,f2){if(!AC||muted)return;try{var o=AC.createOscillat
 function noise(t0,d,v,f,type,f2){if(!AC||muted||!nbuf)return;try{var s=AC.createBufferSource(),fl=AC.createBiquadFilter(),g=AC.createGain(),t=AC.currentTime+t0;s.buffer=nbuf;s.loop=true;fl.type=type||"bandpass";fl.frequency.setValueAtTime(f,t);if(f2)fl.frequency.exponentialRampToValueAtTime(f2,t+d);
   g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(v,t+Math.min(.03,d/3));g.gain.exponentialRampToValueAtTime(0.0001,t+d);s.connect(fl);fl.connect(g);g.connect(master);s.start(t);s.stop(t+d+.05)}catch(e){}}
 function chime(fr,step,type,v){fr.forEach(function(f,i){tone(f,i*step,.9,type||"triangle",v||.16)})}
-function sTear(p){noise(0,.07,.06,900+p*2600,"bandpass")}
+/* 封を切る(指をスライド)ときの音: 金の砂(サラサラ) */
+function sTear(p){noise(0,.06,.02,4200+p*1500,"bandpass",null,.8);noise(0,.05,.012,2200,"bandpass",null,.7)}
 function sTap(){tone(520,0,.12,"sine",.07)}
 /* 開封の音(3+4): 金のフォイルを切るチャキッ → 袋が開くシュッ → 高い鈴のキラッ */
 function sBoom(){
